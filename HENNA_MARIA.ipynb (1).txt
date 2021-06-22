@@ -1,0 +1,85 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "HENNA MARIA",
+      "provenance": []
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "huV89YK3oz2r",
+        "outputId": "30604095-7c22-4f99-bab2-b83076c6704b"
+      },
+      "source": [
+        " \n",
+        "import requests\n",
+        " \n",
+        "from datetime import datetime\n",
+        " \n",
+        "api_key = '50cc1a5dffcd7b06f853af0ce318be4d'\n",
+        " \n",
+        "location = input(\"Enter the city name: \")\n",
+        " \n",
+        "complete_api_link = \"https://api.openweathermap.org/data/2.5/weather?q=\"+location+\"&appid=\"+api_key\n",
+        " \n",
+        "api_link = requests.get(complete_api_link)\n",
+        " \n",
+        "api_data = api_link.json()\n",
+        " \n",
+        "temp_city = ((api_data['main']['temp']) - 273.15)\n",
+        " \n",
+        "weather_desc = api_data['weather'][0]['description']\n",
+        " \n",
+        "hmdt = api_data['main']['humidity']\n",
+        " \n",
+        "wind_spd = api_data['wind' ]['speed']\n",
+        " \n",
+        "date_time = datetime.now() .strftime (\"%d %b %Y | % I: %M:%S %p\")\n",
+        "print (\"-----------------------------------------------------------------\")\n",
+        " \n",
+        "print (\"Weather Status for- {} Il {}\".format(location.upper(), date_time))\n",
+        " \n",
+        "print(\"------------------------------------------------------------------\")\n",
+        " \n",
+        "print (\"Current temperature is:{:.2f} deg C\".format(temp_city))\n",
+        " \n",
+        "print (\"Current weather desc, :\",weather_desc)\n",
+        " \n",
+        "print (\"Current Humidity       :\", hmdt, '%')\n",
+        " \n",
+        "print (\"Current wind speed     :\",wind_spd, 'kmph')"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Enter the city name: Kottayam\n",
+            "-----------------------------------------------------------------\n",
+            "Weather Status for- KOTTAYAM Il 22 Jun 2021 | % I: 01:38 AM\n",
+            "------------------------------------------------------------------\n",
+            "Current temperature is:29.01 deg C\n",
+            "Current weather desc, : overcast clouds\n",
+            "Current Humidity       : 72 %\n",
+            "Current wind speed     : 3.87 kmph\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
